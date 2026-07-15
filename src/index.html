@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔐 口袋保险箱</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <header>
+    <h1>🔐 口袋保险箱</h1>
+    <p>拖进去，文件消失；点一下，文件回来</p>
+  </header>
+
+  <div class="password-area">
+    <input type="password" id="passwordInput" placeholder="输入主密码（请务必记住）" />
+    <button id="unlockBtn">🔓 解锁</button>
+  </div>
+
+  <div id="statusBar">⛔ 请先输入您要设置的保险箱密码</div>
+
+  <div id="dropZone">
+    <div class="drop-content">
+      <span class="icon">📁</span>
+      <span>拖拽文件到此处加密</span>
+      <small>加密后原文件将自动删除</small>
+    </div>
+  </div>
+
+  <div class="file-section">
+    <div class="file-header">
+      <span>📦 已加密文件</span>
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <span id="currentFolderLabel" style="font-size: 12px; color: rgba(255,255,255,0.5); font-weight: normal;">📁 桌面</span>
+        <button id="changeFolderBtn" class="glass-btn" style="padding: 4px 12px; font-size: 12px;">📂 切换文件夹</button>
+        <button id="refreshBtn">🔄 刷新</button>
+      </div>
+    </div>
+    <ul id="fileList">
+      <li class="empty-msg">（该文件夹暂无加密文件）</li>
+    </ul>
+  </div>
+
+  <div class="action-bar">
+  <div style="flex: 2; display: flex; gap: 8px; align-items: center;">
+    <input type="password" id="decryptPasswordInput" placeholder="请输入解密密码" style="flex:1; padding: 8px 12px; border: 1.5px solid #ddd; border-radius: 8px; font-size: 13px; outline: none;" />
+    <button id="decryptBtn" disabled style="flex:1; padding: 10px 0; border: none; border-radius: 10px; font-weight: 600; font-size: 14px; cursor: pointer; background: #34c759; color: #fff;">
+      🔓 解密
+    </button>
+  </div>
+  <button id="selectFileBtn" style="flex:1; padding: 10px 0; border: none; border-radius: 10px; font-weight: 600; font-size: 14px; cursor: pointer; background: #e8ecf1; color: #1a1a2e;">📂 选择文件</button>
+</div>
+
+  <footer></footer>
+</div>
+<!-- 玻璃态弹窗 -->
+<div id="customDialog" style="display: none;">
+  <div class="dialog-overlay">
+    <div class="dialog-glass">
+      <!-- 流光背景特效 -->
+      <div class="flow-effect"></div>
+      <div class="vibrancy-effect"></div>
+      
+      <!-- 内容 -->
+      <div class="dialog-icon" id="dialogIcon">✅</div>
+      <div class="dialog-title" id="dialogTitle">标题</div>
+      <div class="dialog-message" id="dialogMessage">消息内容</div>
+      <button class="dialog-btn" id="dialogBtn">确定</button>
+    </div>
+  </div>
+</div>
+<script src="renderer.js"></script>
+</body>
+</html>

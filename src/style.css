@@ -1,0 +1,506 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #f0f2f5;
+  color: #1a1a2e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  user-select: none;
+}
+
+#app {
+  width: 680px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 28px 32px 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+}
+
+header h1 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+header p {
+  font-size: 14px;
+  color: #888;
+  margin-top: 2px;
+}
+
+.password-area {
+  display: flex;
+  gap: 10px;
+  margin: 16px 0 10px;
+}
+
+.password-area input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1.5px solid #ddd;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.password-area input:focus {
+  border-color: #4f8cf7;
+}
+
+.password-area button {
+  padding: 10px 24px;
+  background: #4f8cf7;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.password-area button:hover {
+  background: #3a7ae8;
+}
+
+.password-area button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#statusBar {
+  font-size: 14px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.08);
+  /* color: rgba(255, 255, 255, 0.7); */
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  text-align: center;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* 解锁状态 - 更淡的提示 */
+#statusBar.unlocked {
+  background: rgba(74, 222, 128, 0.10);
+  color: rgba(74, 222, 128, 0.75);
+  border-color: rgba(74, 222, 128, 0.12);
+}
+/* 警告状态 - 轻微变色 */
+#statusBar.warning {
+  background: rgba(251, 191, 36, 0.10);
+  color: rgba(251, 191, 36, 0.75);
+  border-color: rgba(251, 191, 36, 0.12);
+}
+/* 错误状态 - 轻微变色 */
+#statusBar.error {
+  background: rgba(248, 113, 113, 0.10);
+  color: rgba(248, 113, 113, 0.75);
+  border-color: rgba(248, 113, 113, 0.12);
+}
+/* 成功状态 */
+#statusBar.success {
+  background: rgba(74, 222, 128, 0.10);
+  color: rgba(74, 222, 128, 0.75);
+  border-color: rgba(74, 222, 128, 0.12);
+}
+/* 加密中状态 - 脉冲动画 */
+#statusBar.encrypting {
+  background: rgba(96, 165, 250, 0.08);
+  color: rgba(96, 165, 250, 0.7);
+  border-color: rgba(96, 165, 250, 0.08);
+  animation: pulseStatus 1.5s ease-in-out infinite;
+}
+@keyframes pulseStatus {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+#dropZone {
+  border: 2.5px dashed #c0c4d0;
+  border-radius: 16px;
+  padding: 36px 20px;
+  text-align: center;
+  transition: 0.25s;
+  background: #fafbfc;
+  cursor: pointer;
+}
+
+#dropZone.dragover {
+  border-color: #4f8cf7;
+  background: #eef4ff;
+}
+
+.drop-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.drop-content .icon {
+  font-size: 42px;
+}
+
+.drop-content span {
+  font-size: 17px;
+  font-weight: 500;
+  color: #333;
+}
+
+.drop-content small {
+  font-size: 13px;
+  color: #999;
+}
+
+.file-section {
+  margin-top: 18px;
+}
+
+.file-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+}
+
+.file-header button {
+  background: transparent;
+  border: none;
+  color: #4f8cf7;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+#fileList {
+  list-style: none;
+  max-height: 100px;
+  overflow-y: auto;
+  background: #f8f9fc;
+  border-radius: 10px;
+  padding: 6px 4px;
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+#fileList li {
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#fileList li:hover {
+  background: #eef3ff;
+}
+
+#fileList li.selected {
+  background: #d6e4ff;
+  font-weight: 500;
+}
+
+#fileList .empty-msg {
+  color: #aaa;
+  text-align: center;
+  padding: 12px 0;
+  cursor: default;
+}
+
+.action-bar {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.action-bar button {
+  flex: 1;
+  padding: 10px 0;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.action-bar button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+#decryptBtn {
+  background: #34c759;
+  color: #fff;
+}
+
+#decryptBtn:hover:not(:disabled) {
+  background: #2db84d;
+}
+
+#selectFileBtn {
+  background: #e8ecf1;
+  color: #1a1a2e;
+}
+
+#selectFileBtn:hover {
+  background: #d5dbe4;
+}
+
+footer {
+  text-align: center;
+  font-size: 12px;
+  color: #bbb;
+  margin-top: 18px;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 14px;
+}
+/* 解密密码输入框样式 */
+#decryptPasswordInput:focus {
+  border-color: #34c759 !important;
+}
+
+.action-bar {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.action-bar > div {
+  flex: 2;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  min-width: 280px;
+}
+
+#decryptPasswordInput {
+  flex: 1;
+  min-width: 120px;
+  padding: 10px 14px;
+  border: 1.5px solid #ddd;
+  border-radius: 10px;
+  font-size: 13px;
+  outline: none;
+  transition: 0.2s;
+  background: #fafbfc;
+}
+
+#decryptPasswordInput:focus {
+  border-color: #34c759;
+  background: #fff;
+}
+
+#decryptPasswordInput::placeholder {
+  color: #bbb;
+  font-size: 12px;
+}
+/* ---------- 玻璃态弹窗 ---------- */
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.dialog-glass {
+  position: relative;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(26.5px) saturate(222.5%) contrast(125%) brightness(115%);
+  -webkit-backdrop-filter: blur(26.5px) saturate(222.5%) contrast(125%) brightness(115%);
+  border: 1.5px solid transparent;
+  background-image: linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0.05)),
+                    linear-gradient(rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  border-radius: 28px;
+  box-shadow: 0px 14px 50px 0px rgba(0, 0, 0, 0.35);
+  padding: 40px 48px 32px;
+  min-width: 320px;
+  max-width: 440px;
+  text-align: center;
+  color: #ffffff;
+  transform-style: preserve-3d;
+  will-change: transform, filter;
+  animation: slideDown 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  overflow: hidden;
+}
+
+/* 从上到下出现的动画（带回弹效果） */
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-60px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 背景遮罩淡入 */
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: overlayFadeIn 0.4s ease forwards;
+}
+
+@keyframes overlayFadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+/* 关闭动画 - 向上滑出并淡出 */
+@keyframes slideUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.95);
+  }
+}
+
+@keyframes overlayFadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes scaleIn {
+  from { transform: scale(0.9) rotateX(5deg); opacity: 0; }
+  to { transform: scale(1) rotateX(0); opacity: 1; }
+}
+
+/* 流光背景动画 */
+.dialog-glass .flow-effect {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.10) 50%, transparent 70%);
+  animation: liquidFlow 3.5s ease-in-out infinite;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+@keyframes liquidFlow {
+  0% { transform: translate(-100%, -100%); }
+  50% { transform: translate(100%, 100%); }
+  100% { transform: translate(-100%, -100%); }
+}
+
+/* 辉光效果 */
+.dialog-glass .vibrancy-effect {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 70%);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* 图标 */
+.dialog-icon {
+  position: relative;
+  z-index: 1;
+  font-size: 52px;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+/* 标题 */
+.dialog-title {
+  position: relative;
+  z-index: 1;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 消息 */
+.dialog-message {
+  position: relative;
+  z-index: 1;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  margin-bottom: 24px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* 确定按钮 - 玻璃态 */
+.dialog-btn {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 10px 40px;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 0.5px;
+  min-width: 120px;
+}
+
+.dialog-btn:hover {
+  background: rgba(255, 255, 255, 0.30);
+  transform: scale(1.03);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.dialog-btn:active {
+  transform: scale(0.97);
+}
+
+/* 不同状态的图标颜色 */
+.dialog-glass.info .dialog-icon { color: #60d0e8; }
+.dialog-glass.success .dialog-icon { color: #4ade80; }
+.dialog-glass.warning .dialog-icon { color: #fbbf24; }
+.dialog-glass.error .dialog-icon { color: #f87171; }
