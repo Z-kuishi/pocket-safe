@@ -42,13 +42,6 @@
 | Python | 删除脚本 |
 | AES-256-GCM | 文件加密 |
 | PBKDF2 | 密钥派生 |
-
----
-
-## 📄 许可证
-
-MIT License © 2026 Z-kuishi
-
 ---
 
 ## ⭐ Star
